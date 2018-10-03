@@ -90,6 +90,8 @@ public:
 
     Quaternion getConjugate() const;
 
+    inline vector<3,T> rotate(const vector<3,T>& vec) const;
+
     T abs() const;
     T absSquare() const;
 
@@ -296,6 +298,14 @@ template <typename T>
 Quaternion<T> Quaternion<T>::getConjugate() const
 {
     return Quaternion<T>(-array[0], -array[1], -array[2], array[3]);
+}
+
+template <typename T>
+inline vector<3,T> Quaternion<T>::rotate(const vector<3,T>& v) const
+{
+    const vector<3,T> u(array[0], array[1], array[2]);
+    const T s = array[3];
+    return 2 * vmml::dot(u,v) * u + (s * s - vmml::dot(u,u)) * v + 2 * s * vmml::cross(u,v);
 }
 
 template <typename T>

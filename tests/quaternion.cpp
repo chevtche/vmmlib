@@ -64,4 +64,10 @@ BOOST_AUTO_TEST_CASE(rotate)
         (q1 * q1).equals(vmml::Quaternionf(0.6f, vmml::Vector3f(.5f, .5f, 1.f)),
                          0.00001f),
         vmml::Quaternionf(0.6f, vmml::Vector3f(.5f, .5f, 1.f)));
+
+    const vmml::Vector3f z(0.0f, 0.0f, 1.0f);
+    const vmml::Vector3f result = q1.rotate(z);
+    BOOST_CHECK_CLOSE(result.x(), 0.135533f, 0.01f);
+    BOOST_CHECK_CLOSE(result.y(), 0.-0.105758f, 0.01f);
+    BOOST_CHECK_CLOSE(result.z(), 0.985112f, 0.01f);
 }
